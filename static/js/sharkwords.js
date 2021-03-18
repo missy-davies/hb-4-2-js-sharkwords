@@ -22,7 +22,7 @@ const createDivsForChars = (word) => {
   
   for (const char of word) {
     
-    $('#word-container').append('<div class="letter-box ${char}"></div>'); 
+    $('#word-container').append(`<div class="letter-box ${char}"></div>`); 
   } 
 
 };
@@ -60,7 +60,9 @@ const isLetterInWord = (letter) => {
 // Called when `letter` is in word. Update contents of divs with `letter`.
 //
 const handleCorrectGuess = (letter) => {
-  // Replace this with your code
+
+    $(`div.${letter}`).html(letter);
+
 };
 
 // Called when `letter` is not in word.
@@ -69,8 +71,16 @@ const handleCorrectGuess = (letter) => {
 // message. Otherwise, increment `numWrong` and update the shark image.
 //
 const handleWrongGuess = () => {
-  // Replace this with your code
+    numWrong += 1;
+
+    $('#shark-img img').attr('src', `/static/images/guess${numWrong}.png`);
+
+    if (numWrong === 5) {
+        $('button').attr('disabled', true);
+        $('#play-again').css({ display: 'block' });
+    }
 };
+
 
 //  Reset game state. Called before restarting the game.
 //
